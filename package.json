@@ -1,0 +1,21 @@
+{
+  "name": "texty-boi",
+  "version": "0.0.1",
+  "description": "One texty boi for editing files.",
+  "main": "index.js",
+  "repository": "git@github.com:angushtlam/texty-boi.git",
+  "author": "Angus Lam <angushtlam@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "app": "electron .",
+    "dev-server": "parcel index.html"
+  },
+  "devDependencies": {
+    "electron": "^2.0.2",
+    "parcel-bundler": "^1.9.1"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
