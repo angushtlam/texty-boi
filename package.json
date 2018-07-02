@@ -8,14 +8,18 @@
   "license": "UNLICENSED",
   "scripts": {
     "app": "electron .",
-    "dev-server": "parcel index.html"
+    "dev": "parcel index.html"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "electron": "^2.0.2",
     "parcel-bundler": "^1.9.1"
   },
   "dependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^2.0.0 || ^3.0.0 || ^4.0.0-0"
   }
 }
