@@ -8,7 +8,9 @@ const Editor = ({addLine, lines}) => {
   return (
     <div>
       {
-        lines.map((line, i) => (<Line content={line.content} key={i} skin={line.skin} />))
+        lines.map((line, i) => (
+          <Line content={line.content} key={i} skin={line.skin} />
+        ))
       }
     </div>
   )
@@ -22,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
   addLine: () => dispatch(addLine()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor)
+export default connect(mapStateToProps)(Editor)

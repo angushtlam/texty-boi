@@ -11,10 +11,13 @@
     "dev": "parcel index.html"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "electron": "^2.0.2",
-    "parcel-bundler": "^1.9.1"
+    "parcel-bundler": "^1.9.1",
+    "path": "^0.12.7"
   },
   "dependencies": {
     "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0",
