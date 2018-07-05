@@ -3,7 +3,6 @@ import Editor from './Editor'
 
 const App = () => (
   <div>
-    <h1>One texty boi coming up!</h1>
     <Editor />
   </div>
 )

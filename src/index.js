@@ -4,6 +4,7 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import App from './App'
 import reducers from './reducers'
+import './styles/index'
 
 // Configure store to persist beyond hot reloading
 // https://github.com/parcel-bundler/parcel/issues/314
@@ -20,20 +21,10 @@ function configureStore() {
   return window.store
 }
 
-const store = configureStore()
+const store = configureStore(reducers)
 
-const rerender = Component => {
-  render(
-    <Provider store={store}>
-      <Component />
-    </Provider>
-  , document.getElementById('app'))  
-}
-
-//   module.hot.accept(() => {
-//     const nextRootReducer = require('./reducers').default
-//     store.replaceReducer(nextRootReducer)
-//   })
-// }
-
-rerender(App)
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+, document.getElementById('app'))  

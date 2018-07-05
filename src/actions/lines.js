@@ -1,5 +1,19 @@
-export const addLine = () => ({
-  type: 'NEW_LINE',
-  content: '',
-  skin: '',
+export const DELETE_LINE = 'DELETE_LINE'
+export const NEW_LINE = 'NEW_LINE'
+export const UPDATE_LINE = 'UPDATE_LINE'
+
+export const deleteLine = (lineNumber) => ({
+  type: DELETE_LINE,
+  lineNumber,
+})
+
+export const newLine = (lineNumber) => ({
+  type: NEW_LINE,
+  lineNumber,
+})
+
+export const updateLine = (lineNumber, content) => ({
+  type: UPDATE_LINE,
+  content,
+  lineNumber,
 })
