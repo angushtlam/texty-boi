@@ -1,7 +1,7 @@
 import React from 'react'
-import {render} from 'react-dom'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import App from './App'
 import reducers from './reducers'
 import './styles/index'
@@ -15,16 +15,17 @@ function configureStore() {
     window.store = createStore(reducers)
     return window.store
   }
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === 'development') {
     window.store.replaceReducer(reducers)
   }
   return window.store
 }
 
-const store = configureStore(reducers)
+const store = configureStore()
 
 render(
   <Provider store={store}>
     <App />
-  </Provider>
-, document.getElementById('app'))  
+  </Provider>,
+  document.getElementById('app')
+)

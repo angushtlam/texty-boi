@@ -1,10 +1,10 @@
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 
 // Global reference to the window object.
 let mainWindow
 
 function createWindow() {
-  mainWindow = new BrowserWindow({height: 600, width: 800})
+  mainWindow = new BrowserWindow({ height: 600, width: 800 })
   mainWindow.loadURL('http://localhost:1234/')
 
   // mainWindow.webContents.openDevTools()

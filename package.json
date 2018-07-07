@@ -8,7 +8,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "app": "electron .",
-    "dev": "parcel index.html --no-autoinstall"
+    "dev": "parcel index.html --no-autoinstall",
+    "fix": "rm -rf dist/ && rm -rf .cache/"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

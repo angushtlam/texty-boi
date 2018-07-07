@@ -7,10 +7,7 @@ class Line extends React.PureComponent {
   }
 
   handleKeyPress(event) {
-    const {
-      newLine,
-      lineNumber,
-    } = this.props
+    const { newLine, lineNumber } = this.props
 
     if (event.key === 'Enter') {
       newLine(lineNumber)
@@ -18,11 +15,8 @@ class Line extends React.PureComponent {
   }
 
   render() {
-    const {
-      content,
-      skin,
-    } = this.props
-    
+    const { content, skin } = this.props
+
     return (
       <div className={`line line-${skin}`}>
         <input value={content} onKeyPress={this.handleKeyPress} />

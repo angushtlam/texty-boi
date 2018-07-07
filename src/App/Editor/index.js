@@ -1,32 +1,13 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {
-  deleteLine,
-  newLine,
-} from '../../actions/lines'
-import Line from './Line'
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { deleteLine, newLine } from '../../actions/lines'
 
-const Editor = ({
-  deleteLine,
-  lines,
-  newLine,
-}) => {
-  return (
-    <div className="editor">
-      {
-        lines.map((line, i) => (
-          <Line
-            content={line.content}
-            deleteLine={deleteLine}
-            key={i}
-            lineNumber={i}
-            newLine={newLine}
-            skin={line.skin}
-          />
-        ))
-      }
-    </div>
-  )
+class Editor extends React.Component {
+  constructor() {
+    super()
+  }
+
+  render() {}
 }
 
 const mapStateToProps = state => ({
@@ -38,4 +19,7 @@ const mapDispatchToProps = dispatch => ({
   newLine: lineNumber => dispatch(newLine(lineNumber)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Editor)

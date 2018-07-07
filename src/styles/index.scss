@@ -12,17 +12,6 @@ body {
 }
 
 .editor {
-  padding: 15px;
-
-  > .line input {
-    background: inherit;
-    border: 0;
-    font-size: 16px;
-    color: #fff;
-    width: 100%;
-    
-    &:focus {
-      outline: none;
-    }
-  }
+  background: #111;
+  margin: 15px;
 }
