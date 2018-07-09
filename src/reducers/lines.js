@@ -1,11 +1,11 @@
-import { DELETE_LINE, NEW_LINE, UPDATE_LINE } from '../actions/lines'
+import {DELETE_LINE, NEW_LINE, UPDATE_LINE} from '../actions/lines'
 
 const lines = (
   state = [
-    { content: 'what' },
-    { content: 'hello' },
-    { content: 'hello' },
-    { content: 'hello' },
+    {value: 'what'},
+    {value: 'hello'},
+    {value: 'hello'},
+    {value: 'hello'},
   ],
   action
 ) => {
@@ -19,13 +19,13 @@ const lines = (
 
     case NEW_LINE:
       newState.splice(lineNumber + 1, 0, {
-        content: '',
+        value: '',
       })
       return newState
 
     case UPDATE_LINE:
       newState[lineNumber] = {
-        content: action.content,
+        value: action.content,
         skin: action.skin,
       }
       return newState

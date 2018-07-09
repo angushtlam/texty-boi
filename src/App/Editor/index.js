@@ -1,13 +1,26 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { deleteLine, newLine } from '../../actions/lines'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Line from './Line'
 
-class Editor extends React.Component {
+class Editor extends Component {
   constructor() {
     super()
   }
 
-  render() {}
+  render() {
+    const {lines} = this.props
+    const renderLines = lines.map((line, i) => (
+      <Line
+        key={i}
+        value={line.value}
+        onChange={(_, value) => {
+          console.log(value)
+        }}
+      />
+    ))
+
+    return <div>{renderLines}</div>
+  }
 }
 
 const mapStateToProps = state => ({
