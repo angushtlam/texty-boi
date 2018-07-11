@@ -12,8 +12,8 @@ export const newLine = lineNumber => ({
   lineNumber,
 })
 
-export const updateLine = (lineNumber, content) => ({
+export const updateLine = (lineNumber, line) => ({
   type: UPDATE_LINE,
-  content,
+  line,
   lineNumber,
 })

@@ -1,99 +1,85 @@
-import React, {Component, createRef} from 'react'
+import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import Editable from './Editable'
 
 const propTypes = {
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  value: PropTypes.string,
+  line: PropTypes.object,
+  lineNumber: PropTypes.number,
+  onDeleteLine: PropTypes.func,
+  onNewLine: PropTypes.func,
+  onUpdateLine: PropTypes.func,
 }
 
 const defaultProps = {
-  onChange: () => {},
-  onKeyDown: () => {},
-  value: '',
+  line: {
+    skin: '',
+    number: -1,
+    value: '',
+  },
+  onDeleteLine: () => {},
+  onNewLine: () => {},
+  onUpdateLine: () => {},
 }
 
-const sanitizeValue = value =>
-  value
-    .replace(/&nbsp;/g, ' ')
-    .replace(/\s+/g, ' ')
-    .split('\n')
-    .map(line => line.trim())
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n') // replace 3+ line breaks with two
-    .trim()
+class Line extends PureComponent {
+  constructor() {
+    super()
 
-class Line extends Component {
-  constructor(props) {
-    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+  }
 
-    this.state = {
-      value: props.value,
+  handleChange(_, value) {
+    const {line, onUpdateLine} = this.props
+    const newLine = {
+      ...line,
+      value,
     }
 
-    this.lineElement = createRef()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.state.value) {
-      this.setState({value: nextProps.value}, this.forceUpdate)
+    if (value.startsWith('>')) {
+      newLine['skin'] = 'quote'
+    } else if (value.startsWith('##')) {
+      newLine['skin'] = 'subheader'
+    } else if (value.startsWith('#')) {
+      newLine['skin'] = 'header'
+    } else if (
+      value.length > 1 &&
+      value.startsWith('`') &&
+      value.endsWith('`')
+    ) {
+      newLine['skin'] = 'code'
+    } else {
+      newLine['skin'] = null
     }
-  }
 
-  shouldComponentUpdate(nextProps) {
-    const propKeys = Object.keys(propTypes).filter(
-      propType => propType != 'value'
-    )
-
-    return propKeys.some(propKey => {
-      nextProps[propKey] !== this.props[propKey]
-    })
-  }
-
-  handleBlur(event) {
-    const value = sanitizeValue(this.lineElement.innerText)
-
-    // Set the state when the field is blurred and the values are different.
-    this.setState({value}, () => {
-      this.props.onChange(event, value)
-      this.forceUpdate()
-    })
-  }
-
-  handleChange(event) {
-    const value = sanitizeValue(this.lineElement.innerText)
-
-    if (this.state.value !== value) {
-      this.setState({value}, () => {
-        this.props.onChange(event, value)
-      })
-    }
+    onUpdateLine(line.number, newLine)
   }
 
   handleKeyDown(event) {
-    // If the enter key is pressed, blur the element.
-    if (event.keyCode === 13) {
-      event.preventDefault()
-      event.currentTarget.blur()
-    }
+    const {line, onDeleteLine, onNewLine} = this.props
 
-    this.props.onKeyDown(event)
+    // Keycode 8 is Backspace
+    if (event.keyCode === 8 && !line.value) {
+      onDeleteLine(line.number)
+
+      // Keycode 13 is Enter.
+    } else if (event.keyCode === 13) {
+      onNewLine(line.number)
+    }
   }
 
   render() {
-    const {skin} = this.props
-    const {value} = this.state
-
+    const {line} = this.props
     return (
-      <div
-        className={`line line-${skin}`}
-        contentEditable={true}
-        dangerouslySetInnerHTML={{__html: value}}
-        onBlur={this.handleBlur.bind(this)}
-        onInput={this.handleChange.bind(this)}
-        onKeyDown={this.handleKeyDown.bind(this)}
-        ref={ref => (this.lineElement = ref)}
-      />
+      <div className={`line skin-${line.skin || 'none'}`}>
+        <div className="number">{line.number + 1}</div>
+        <Editable
+          className="value"
+          onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
+          value={line.value}
+        />
+      </div>
     )
   }
 }

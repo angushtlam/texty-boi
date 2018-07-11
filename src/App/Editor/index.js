@@ -1,25 +1,26 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
+import {deleteLine, newLine, updateLine} from '../../actions/lines'
 import Line from './Line'
 
-class Editor extends Component {
-  constructor() {
-    super()
-  }
-
+class Editor extends PureComponent {
   render() {
-    const {lines} = this.props
+    const {deleteLine, lines, newLine, updateLine} = this.props
     const renderLines = lines.map((line, i) => (
       <Line
         key={i}
-        value={line.value}
-        onChange={(_, value) => {
-          console.log(value)
+        line={{
+          ...line,
+          number: i,
         }}
+        lineNumber={i}
+        onDeleteLine={deleteLine}
+        onNewLine={newLine}
+        onUpdateLine={updateLine}
       />
     ))
 
-    return <div>{renderLines}</div>
+    return <div className="editor">{renderLines}</div>
   }
 }
 
@@ -30,6 +31,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   deleteLine: lineNumber => dispatch(deleteLine(lineNumber)),
   newLine: lineNumber => dispatch(newLine(lineNumber)),
+  updateLine: (lineNumber, line) => dispatch(updateLine(lineNumber, line)),
 })
 
 export default connect(
