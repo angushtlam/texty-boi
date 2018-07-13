@@ -1,18 +1,35 @@
 export function getNewLineProperties(line) {
-  const newLine = {...line}
-  const {value} = newLine
+  const {skin} = line
+  switch (skin) {
+    default:
+      return getNewLinePropertiesFromDefault(line)
+  }
+}
 
-  if (value.startsWith('>')) {
-    newLine.skin = 'quote'
-  } else if (value.startsWith('##')) {
-    newLine.skin = 'subheader'
-  } else if (value.startsWith('#')) {
-    newLine.skin = 'header'
-  } else if (value.length > 1 && value.startsWith('`') && value.endsWith('`')) {
-    newLine.skin = 'code'
-  } else {
-    newLine.skin = null
+function getNewLinePropertiesFromDefault(line) {
+  const {value} = line
+
+  if (value.startsWith('> ')) {
+    return {
+      ...line,
+      skin: 'quote',
+    }
+  } else if (value.startsWith('## ')) {
+    return {
+      ...line,
+      skin: 'subheader',
+    }
+  } else if (value.startsWith('# ')) {
+    return {
+      ...line,
+      skin: 'header',
+    }
+  } else if (value.toUpperCase().startsWith('TODO ')) {
+    return {
+      ...line,
+      skin: 'todo',
+    }
   }
 
-  return newLine
+  return line
 }

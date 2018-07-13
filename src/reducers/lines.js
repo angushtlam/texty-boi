@@ -15,7 +15,7 @@ const lines = (
     {value: '> mfw supports greentext', skin: 'quote'},
     {value: '> now you have to use it', skin: 'quote'},
     {value: ''},
-    {value: '`super.hacker.mode.nil? = false`', skin: 'code'},
+    {value: 'TODO finish writing this editor lmao', skin: 'todo'},
     {value: ''},
     {value: ''},
     {value: ''},

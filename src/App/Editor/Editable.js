@@ -17,15 +17,8 @@ const defaultProps = {
   value: '',
 }
 
-const sanitizeValue = value =>
-  value
-    .replace(/&nbsp;/g, ' ')
-    .replace(/\s+/g, ' ')
-    .split('\n')
-    .map(line => line.trim())
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n') // replace 3+ line breaks with two
-    .trim()
+// Remove weirdness from browser contenteditables
+const sanitizeValue = value => value.replace(/ /g, ' ').replace(/&nbsp;/g, ' ')
 
 class Editable extends Component {
   constructor(props) {
@@ -68,7 +61,6 @@ class Editable extends Component {
         this.forceUpdate()
       }
     })
-
     this.props.onBlur(event)
   }
 
@@ -77,7 +69,7 @@ class Editable extends Component {
 
     if (this.state.value !== value) {
       this.setState({value}, () => {
-        this.props.onChange(event, value)
+        this.props.onChange(event, this.state.value)
       })
     }
   }
@@ -94,7 +86,6 @@ class Editable extends Component {
 
   render() {
     const {value} = this.state
-
     return (
       <div
         className={this.props.className}

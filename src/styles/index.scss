@@ -54,15 +54,26 @@ body {
   }
 
   &.skin-quote {
+    > .number {
+      background: #ad9684;
+      color: #5c662e;
+    }
+
     > .value {
       background: #f1e1d5;
       color: #879254;
     }
   }
 
-  &.skin-code {
+  &.skin-todo {
+    > .number {
+      background: #133bbd;
+      color: #ffffff;
+    }
+
     > .value {
-      font-family: monospace;
+      background: #3262ff;
+      color: #ffffff;
     }
   }
 }
