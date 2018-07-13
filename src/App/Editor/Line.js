@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import Editable from './Editable'
+import {getNewLineProperties} from './utils'
 
 const propTypes = {
   line: PropTypes.object,
@@ -31,28 +32,7 @@ class Line extends PureComponent {
 
   handleChange(_, value) {
     const {line, onUpdateLine} = this.props
-    const newLine = {
-      ...line,
-      value,
-    }
-
-    if (value.startsWith('>')) {
-      newLine['skin'] = 'quote'
-    } else if (value.startsWith('##')) {
-      newLine['skin'] = 'subheader'
-    } else if (value.startsWith('#')) {
-      newLine['skin'] = 'header'
-    } else if (
-      value.length > 1 &&
-      value.startsWith('`') &&
-      value.endsWith('`')
-    ) {
-      newLine['skin'] = 'code'
-    } else {
-      newLine['skin'] = null
-    }
-
-    onUpdateLine(line.number, newLine)
+    onUpdateLine(line.number, getNewLineProperties({...line, value}))
   }
 
   handleKeyDown(event) {
